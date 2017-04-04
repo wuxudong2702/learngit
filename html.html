@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>todolist</title>
+    <link rel="stylesheet" type="text/css" media="screen"href="style.css"/>
+    <!--<script type="text/javascript"src="todolist.js "></script>-->
+</head>
+<body>
+    <div class="top">
+        <span>列个表单吧!</span>
+        <input id="input" type="text ">
+        <button type="button " style="background-color:#8ac73f ;margin-top:18px;margin-left:-140px;height:60%;width:60px" onclick="search()" >查询</button>
+        <button type="button " style="background-color:#8ac73f ;margin-left:14px;height:60%;width:60px"onclick="returnsearch()" >返回</button>
+    </div>
+    <div class="content">
+        <div class="finish"id="finish">
+            <p>1.未完成的事情</p>
+        </div>
+        <div class="finish"id="finished">
+            <p>2.已经完成啦！！！</p>
+        </div>
+    </div>
+<script type="text/javascript">
+
+    var input=document.getElementById("input");
+    var finish=document.getElementById('finish');
+    var finished=document.getElementById('finished');
+     var list=[];//存储input.value
+    var i=0; //id
+    var k=0;//传送删除的id
+    var j=false;//标记删除id
+    var m=0;//记录i的值，
+    var listsh =[];//存储div
+    var removeListId=[];
+    addEventListener ("keydown",function(event){
+        if (event.keyCode == 13&&input.value!=='') {
+           if(j===true){
+              i=removeListId[0];
+               removeByValue(removeListId,i);
+               if(removeListId.length===0){
+                   j=false;
+               }
+           }
+            else{
+               i=m;
+           }
+            list.push(input.value);
+            var divi = document.createElement('div');
+//            finish.appendChild(divi);
+           if(finish.children.length>1) {
+               finish.insertBefore(divi,finish.childNodes[2]);
+            }
+            else{
+                           finish.appendChild(divi);
+            }
+            divi.setAttribute('class','divii');
+            divi.setAttribute('id',i);
+            divi.style.display="block";
+            var checkbox=document.createElement('input');
+            divi.appendChild(checkbox);
+            checkbox.setAttribute('type','checkbox');
+            checkbox.setAttribute('class','checkbox');
+           checkbox.setAttribute('id',100+i);
+            checkbox.setAttribute('onclick','remove_append(this.id)');
+            checkbox.style.position='relative'
+            var input_change = document.createElement('input');
+            divi.appendChild(input_change);
+            input_change.setAttribute("id",i+1100);
+            input_change.setAttribute("onblur","change(this.id)");
+            input_change.style.fontSize="20px";
+            input_change.style.width="450px";
+            input_change.style.height="25px";
+            input_change.style.marginTop="10px";
+            input_change.style.marginBottom="12px";
+            input_change.style.position="absolute";
+            input_change.style.borderStyle="none";
+            input_change.style.marginLeft="10px";
+
+            input_change.setAttribute('value',input.value);
+            input.value="";
+             var btn=document.createElement('input');
+            divi.appendChild(btn);
+            btn.setAttribute('id',i+1000);
+            btn.style.marginRight="5px";
+            btn.setAttribute('class','btn');
+            btn.setAttribute('type','button');
+            btn.setAttribute('value','删除');
+           btn.setAttribute('onclick','remove1(this.id)');
+            i++;
+            m++;
+           // list1.push(i);
+            listsh.push(divi);
+
+        }
+    });
+    function removeByValue(arr, val) {//通过id索引删除节点。
+        for(var i=0; i<arr.length; i++) {
+            if(arr[i] == val) {
+                arr.splice(i, 1);
+                break;
+            }
+        }
+    }
+    var remove1=function(id){//删除事件
+       // k=id-1000;
+        j=true;
+        removeListId.push(id-1000);
+       var x= document.getElementById(id-1000);
+        x.parentNode.removeChild(document.getElementById(id-1000));
+        removeByValue(listsh,x);
+        removeByValue(list, x.firstChild.nextSibling.value);
+      //  console.log(x);
+      //  console.log(list[id-1000]);
+       // console.log("listsh",listsh.length,listsh,id-1000);
+       // console.log("list",list.length,list,id-1000);
+      //  console.log("list1",list1.length,list1);
+    }
+    var remove_append=function(id){//已经完成事件
+        if(finished.children.length>1) {
+            finished.insertBefore(document.getElementById(id-100),finished.childNodes[2]);
+        }
+        else{
+            finished.appendChild(document.getElementById(id-100));
+        }
+        //finished.appendChild(document.getElementById(id-100));
+        document.getElementById(id).setAttribute('onclick','up(this.id)');
+        document.getElementById(id-100).style.backgroundColor='gray';
+        document.getElementById(id-100).firstChild.nextSibling.style.backgroundColor='gray';
+       // document.getElementById(id-100).firstChild.style.backgroundColor='gray';
+       // document.getElementById(id-100).lastChild.style.backgroundColor='gray';
+    }
+
+ function up(id) {//完成事件改变为完成事件
+     finish.appendChild(document.getElementById(id-100));
+     document.getElementById(id).setAttribute("onclick",'remove_append(this.id)');
+     document.getElementById(id-100).style.backgroundColor='white';
+     document.getElementById(id-100).firstChild.nextSibling.style.backgroundColor='white';
+    // document.getElementById(id-100).firstChild.style.backgroundColor='white';
+    // document.getElementById(id-100).lastChild.style.backgroundColor='white';
+ }
+function search(){//查询
+    var lists=[];//未完成任务节点divclass
+    var listsed=[];//完成任务节点divclass
+   var showdiv=[];
+    for(var i=0;i<list.length;i++){
+        if(list[i].indexOf(input.value)>=0){
+          showdiv.push(list[i]);
+        }
+    }
+    var divclass =document.getElementById('finish').getElementsByTagName('div');
+    var divclassed =document.getElementById('finished').getElementsByTagName('div');
+    for(var j=divclass.length-1;j>=0;j--){
+        lists[j]=divclass[j];
+        finish.removeChild(divclass[j]);
+    }
+    for(var j=divclassed.length-1;j>=0;j--){
+        listsed[j]=divclassed[j];
+        finished.removeChild(divclassed[j]);
+    }
+    for(var i=0;i<showdiv.length;i++){
+        for(var j=0;j<lists.length;j++){
+            if(showdiv[i]===lists[j].firstChild.nextSibling.value){
+                finish.appendChild(lists[j]);
+            }
+        }
+        for(var j=0;j<listsed.length;j++){
+            if(showdiv[i]===listsed[j].firstChild.nextSibling.value){
+                finished.appendChild(listsed[j]);
+            }
+        }
+    }
+}
+    //查询后返回结果
+function returnsearch(){
+    for(var j=0;j<listsh.length;j++){
+        if(!listsh[j].firstChild.checked)
+        finish.appendChild(listsh[j]);
+        else   finished.appendChild(listsh[j]);
+    }
+    input.value="";
+}
+function change(id){
+    console.log(id);
+    console.log(list);
+   list[id-1100]=document.getElementById(id).value;
+    console.log(list);
+}
+
+</script>
+</body>
+</html>
