@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" media="screen"href="style.css"/>
+
+</head>
+<body>
+    <div class="top">
+        <span>列个表单吧!</span>
+        <input id="input" type="text ">
+    </div>
+    <div class="content">
+        <div class="finish"id="finish">
+            <p>1.待完成的事情</p>
+
+        </div>
+        <div class="finish"id="finished">
+            <p>2.未完成的事情</p>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        var input=document.getElementById('input');
+        var finish=document.getElementById('finish');
+       var finished=document.getElementById('finished');
+        var list=[],i= 0;
+        addEventListener ("keydown",function(event){
+            if (event.keyCode == 13&&input.value!=='') {
+
+                var divi = document.createElement('div');
+                var divs =document.getElementsByClassName('divs');
+            //   if(finish.hasChildNodes) {
+                 //finish.insertBefore(divi,divs[0]);
+             //  }
+              finish.appendChild(divi);
+             // divi.setAttribute('class','divs');
+               // divi.setAttribute('value',input.value);
+
+                divi.setAttribute('width','50px');
+                divi.setAttribute('height', '35px');
+                 divi.style.backgroundColor="white";
+                divi.style.marginTop="0";
+                divi.style.marginBottom="15px";
+
+
+                var checkbox=document.createElement('input');
+                divi.appendChild(checkbox);
+                checkbox.setAttribute('type','checkbox');
+             // checkbox.setAttribute('id',i);
+                checkbox.style.float="left";
+                checkbox.style.width="18px";
+                checkbox.style.height="18px";
+                checkbox.style.marginTop="7px";
+
+               //checkbox.setAttribute('onclick','remove_insert(xid)');
+
+
+
+                var span = document.createElement('span');
+                //span.innerHTML ='';
+                divi.appendChild(span);
+                span.style.marginLeft="30px";
+                //span.style.marginRight="30px";
+                span.style.display="block";
+
+
+                var  btn=document.createElement('input');
+                span.appendChild(btn);
+               btn.style.float="right";
+                btn.style.width="50px";
+                btn.style.height="35px";
+//                btn.style.marginTop="7px";
+                btn.setAttribute('type','button');
+                btn.setAttribute('value','删除');
+
+            }
+        });
+//
+      //  }
+
+        var remove_insert= function(xid){
+       // var checkboxi=document.getElementById('div'+i);
+
+            var divs =document.getElementsByClassName('divs');
+          //  var divsed =document.getElementsByClassName('divsed');
+
+
+           // console.log(id);
+            finish.removeChild(divs[xid]);
+//            console.log(divs[0]);
+//           console.log(i);
+//            console.log(divs[i]);
+//             for(var j=0;j<divs.length;j++) {
+//                 if (divs[j].firstChild.checked) {
+//                     console.log(j);
+//                     divs[j].class='divsed';
+//                     finished.appendChild(divs[j]);
+//                     console.log('000'+divs.length);
+//
+//                    // divs.length=divs.length-1;
+//<!DOCTYPE html>
+            <html lang="en">
+                    <head>
+                    <meta charset="UTF-8">
+                    <title>Title</title>
+                    <link rel="stylesheet" type="text/css" media="screen"href="style.css"/>
+                    <!--<script type="text/javascript"src="todolist.js "></script>-->
+    </head>
+    <body>
+    <div class="top">
+        <span>列个表单吧!</span>
+        <input id="input" type="text ">
+    </div>
+    <div class="content">
+        <div class="finish"id="finish">
+            <p>1.待完成的事情</p>
+
+        </div>
+        <div class="finish"id="finished">
+            <p>2.未完成的事情</p>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        var input=document.getElementById("input");
+        var finish=document.getElementById('finish');
+        var finished=document.getElementById('finished');
+        //console.log(divclass)
+        var list=[];var i=0;
+        var listed=[];
+
+        addEventListener ("keydown",function(event){
+            if (event.keyCode == 13&&input.value!=='') {
+                list.push(input.value);
+                var divi = document.createElement('div');
+                finish.appendChild(divi);
+                divi.setAttribute('class','divii');
+                divi.setAttribute('id',i);
+                var checkbox=document.createElement('input');
+                divi.appendChild(checkbox);
+                checkbox.setAttribute('type','checkbox');
+                checkbox.setAttribute('class','checkbox');
+                //checkbox.setAttribute('id',1000+i);
+                checkbox.setAttribute('onclick','remove_append(i)');
+
+                var span = document.createElement('span');
+                divi.appendChild(span);
+                span.setAttribute('type','checkbox');
+                span.innerHTML =input.value;
+                // input.value="";
+                var btn=document.createElement('input');
+                divi.appendChild(btn);
+                // btn.setAttribute('id',i);
+
+                btn.setAttribute('class','btn');
+                btn.setAttribute('type','button');
+                btn.setAttribute('value','删除');
+                btn.setAttribute('onclick','remove1(i)');
+                i++;
+                //  addAtr();
+            }
+        });
+        //    var addAtr =function(){
+        //        var divclass =document.getElementById('finish').getElementsByTagName('div');
+        //      // var divclassed =document.getElementById('finished').getElementsByTagName('div').length;
+        //
+        //        //for(var i=0;i<divclass.length;i++){
+        //    //    divclass[i].firstChild.nextSibling .innerText =list[divclass.length-1-i];
+        //           //divclass[i].lastChild.id=i;
+        //          //  divclass[i].lastChild.onClick=remove(divclass,this.id);
+        //          //  divclass[i].firstChild.cheched=remove_append(divclass,i);
+        //
+        //      //  }
+        //
+        //    }
+        var remove1=function(j){
+            var divclass =document.getElementById('finish').getElementsByTagName('div');
+            console.log(j,"11111");
+            // if(divclass[i].firstChild.checked) {
+            finish.removeChild(document.getElementById(j));
+
+            // }
+            // list.remove(j);
+            // for(var i=0;i<divclass.length;i++){
+            // divclass[i].firstChild.nextSibling .innerText =list[divclass.length-1-i];
+            //  divclass[i].lastChild.id=i;//btn id
+            //  divclass[i].firstChild.id=1000+i;//checkbox id
+            //  }
+        }
+
+        //var checkedi=0;
+        var remove_append=function(j){
+            //  checkedi++;
+            var divclass =document.getElementById('finish').getElementsByTagName('div');
+            console.log(j,"2222");
+            // listed.push(divclass[j].firstChild.nextSibling.innerText );
+            finished.appendChild(document.getElementById('j'));
+
+            // var divclassed =document.getElementById('finished').getElementsByTagName('div');
+            document.getElementById(j).firstChild.setAttribute('onclick','up(j)');
+
+//        for(var i=0;i< divclassed.length;i++){
+//          //  divclassed[i].firstChild.nextSibling .innerText =listed[divclassed.length-1-i];
+//            divclassed[i].lastChild.id=i+100;//btn id
+//            divclassed[i].firstChild.id=10000+i;//checkbox id
+//            divclassed[i].firstChild.setAttribute('onclick','up(this.id-10000)');
+//        }
+//        for(var i=0;i<divclass.length;i++){
+//          //  divclass[i].firstChild.nextSibling .innerText =list[divclass.length-1-i];
+//            divclass[i].lastChild.id=i;
+//            divclass[i].firstChild.id=1000+i;
+//
+//            //  divclass[i].lastChild.onClick=remove(divclass,this.id);
+//            //  divclass[i].firstChild.cheched=remove_append(divclass,i);
+//
+//        }
+
+        }
+        //未完成事件 的按钮
+
+        function up(j) {
+            console.log(j);
+            //  var divclassed = document.getElementById('finished').getElementsByTagName('div');
+
+            // list.push(divclassed[j].firstChild.nextSibling.innerText );
+            finish.appendChild(document.getElementById(j));
+            document.getElementById(j).firstChild.setAttribute("onclick",'remove_append(j)');
+//     var divclass =document.getElementById('finish').getElementsByTagName('div');
+//
+//     for(var i=0;i< divclassed.length;i++){
+//             // divclassed[i].firstChild.nextSibling .innerText =listed[divclassed.length-1-i];
+//             divclassed[i].lastChild.id=i+100;//btn id
+//             divclassed[i].firstChild.id=10000+i;//checkbox id
+//         divclassed[i].firstChild.setAttribute('onclick','up(this.id-10000)');
+//     }
+//     for(var i=0;i<divclass.length;i++){
+//       //  divclass[i].firstChild.nextSibling .innerText =list[divclass.length-1-i];
+//         divclass[i].lastChild.id=i;
+//         divclass[i].firstChild.id=1000+i;
+//
+//     }
+
+
+        }
+
+
+        //    var remove_insert= function(xid){
+        //        // var checkboxi=document.getElementById('div'+i);
+        //
+        //        var divs =document.getElementsByClassName('divs');
+        //        //  var divsed =document.getElementsByClassName('divsed');
+        //
+        //
+        //        // console.log(id);
+        //        finish.removeChild(divs[xid]);
+        ////            console.log(divs[0]);
+        ////           console.log(i);
+        ////            console.log(divs[i]);
+        ////             for(var j=0;j<divs.length;j++) {
+        ////                 if (divs[j].firstChild.checked) {
+        ////                     console.log(j);
+        ////                     divs[j].class='divsed';
+        ////                     finished.appendChild(divs[j]);
+        ////                     console.log('000'+divs.length);
+        ////
+        ////                    // divs.length=divs.length-1;
+        ////
+        ////                     //console.log('(999'+divs.length);
+        ////                   //
+        ////                     //finish.removeChild(divs[j]);
+        ////                    // console.log('removed00000000');
+        //        //  }
+        //        //   }
+        //    }
+
+    </script>
+    </body>
+</html>
+//                     //console.log('(999'+divs.length);
+//                   //
+//                     //finish.removeChild(divs[j]);
+//                    // console.log('removed00000000');
+               //  }
+          //   }
+        }
+    </script>
+</body>
+</html>
